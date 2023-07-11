@@ -11,7 +11,7 @@ class CreateUserController extends WebController
 {
     public function create(CreateUserRequest $request)
     {
-        // ..
+
     }
 
     public function store(StoreUserRequest $request)

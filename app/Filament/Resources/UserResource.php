@@ -4,11 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Containers\AppSection\User\Models\User;
 use App\Filament\Resources\UserResource\Pages;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 
+use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -21,13 +20,7 @@ class UserResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('l_name')->required(),
-                Forms\Components\TextInput::make('f_name')->required(),
-                Forms\Components\TextInput::make('m_name')->required(),
-                Forms\Components\TextInput::make('email')->email()->required(),
-            ]);
+        return $form;
     }
 
     public static function table(Table $table): Table
@@ -49,6 +42,14 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->label('Почта')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Почта')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('gender')
+                    ->label('Пол'),
+                Tables\Columns\TextColumn::make('birth')
+                    ->date('d.m.Y')
+                    ->label('Дата рождения'),
             ])
             ->filters(
                 [
@@ -89,7 +90,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            //UserResource\RelationManagers\UsersRelationManager::class,
         ];
     }
 
