@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources\UserResource\Pages;
 
-use Filament\Pages\Actions;
 use App\Filament\Resources\UserResource;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Pages\Actions;
 
 use Filament\Resources\Form;
 use Filament\Resources\Pages\EditRecord;
@@ -18,16 +18,7 @@ class EditUser extends EditRecord
 
     public function form(Form $form): Form
     {
-        //        $roles = app(RoleRepository::class)->pluck('name','id');
-        //        dd($roles);
-
         return $form->schema([
-//            Grid::make(3)->schema([
-//                Select::make('Роль')
-//                    ->options(function ()
-//                    {
-//                    }),
-//            ]),
             Grid::make(3)->schema([
                 Forms\Components\TextInput::make('l_name')
                     ->label('Фамилия')

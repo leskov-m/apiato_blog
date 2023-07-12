@@ -3,14 +3,15 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
-use Filament\Resources\Pages\CreateRecord;
-
 use Filament\Forms;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Resources\Form;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Form;
+use Filament\Resources\Pages\CreateRecord;
 
 class CreateUser extends CreateRecord
 {
@@ -18,29 +19,24 @@ class CreateUser extends CreateRecord
 
     public function form(Form $form): Form
     {
-        //        $roles = app(RoleRepository::class)->pluck('name','id');
-        //        dd($roles);
-
         return $form->schema([
-//            Grid::make(3)->schema([
-//                Select::make('Роль')
-//                    ->options(function ()
-//                    {
-//                    }),
-//            ]),
             Grid::make(3)->schema([
                 Forms\Components\TextInput::make('l_name')
                     ->label('Фамилия')
+                    ->maxLength(191)
                     ->required(),
                 Forms\Components\TextInput::make('f_name')
                     ->label('Имя')
+                    ->maxLength(191)
                     ->required(),
                 Forms\Components\TextInput::make('m_name')
-                    ->label('Отчество'),
+                    ->label('Отчество')
+                    ->maxLength(191),
             ]),
             Grid::make(2)->schema([
                 Forms\Components\TextInput::make('email')
                     ->label('Электронная почта')
+                    ->maxLength(191)
                     ->email()
                     ->required(),
                 Forms\Components\TextInput::make('phone')
@@ -56,10 +52,20 @@ class CreateUser extends CreateRecord
                     ]),
                 DatePicker::make('birth'),
             ]),
-            Grid::make(1)->schema([
-                Forms\Components\TextInput::make('password')
+            Grid::make(2)->schema([
+                TextInput::make('password')
+                    ->minLength(8)
+                    ->maxLength(191)
                     ->required()
-                    ->label('Введите пароль'),
+                    ->password()
+                    ->label('Введите новый пароль')
+                    ->confirmed(),
+                TextInput::make('password_confirmation')
+                    ->minLength(8)
+                    ->maxLength(191)
+                    ->required()
+                    ->password()
+                    ->label('Подтвердите пароль'),
             ]),
         ]);
     }
